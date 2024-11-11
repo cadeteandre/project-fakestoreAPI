@@ -1,0 +1,111 @@
+body {
+  margin: 0;
+  display: flex;
+  /* place-items: center; */
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+h1 {
+  color: #ee4933;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #ee4933;
+  color: #fff;
+  padding: 40px 0 20px 0;
+}
+
+.search__sort form {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+form input {
+  border: 1px solid #000;
+  border-radius: 3px;
+  width: 30%;
+}
+
+form select {
+  border-radius: 5px;
+}
+
+.filter h4 {
+  display: inline;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.product__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  width: 230px;
+  max-height: 450px;
+  border: none;
+  border-radius: 3%;
+  box-shadow: 5px 5px 10px #00000080;
+
+}
+
+.product__container img {
+  width: 150px;
+  align-self: center;
+  margin: auto;
+  /* height: 200px; */
+}
+
+.product__info {
+  width: 100%;
+}
+
+.price__button__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price__button__container span {
+  color: rgb(60, 174, 83);
+}
+
+button {
+  color: #fff;
+  background-color: #ee4933;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.filter button, #searchBtn {
+  border: 1px solid #fff;
+  height: 24px;
+  padding: 4px;
+}

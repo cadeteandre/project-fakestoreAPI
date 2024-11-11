@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Fakestore API</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>SuperFakeStore</h1>
+      <header>
+        <div class="search__sort">
+          <form onsubmit="return false">
+            <input type="text" name="searchInput" id="searchInput" placeholder="Search by title">
+            <button id="searchBtn">Search</button>
+            <select name="sort" id="sortSelect">
+              <option value="sortBy">Sort By</option>
+              <option value="desc">Desc</option>
+              <option value="asc">Asc</option>
+            </select>
+          </form>
+        </div>
+      <div class="filter">
+        <h4>Filter by Categories</h4>
+        <button value="electronics" class="filter__Btn">electronics</button>
+        <button value="jewelery" class="filter__Btn">jewelery</button>
+        <button value="men's clothing" class="filter__Btn">men's clothing</button>
+        <button value="women's clothing" class="filter__Btn">women's clothing</button>
+      </div>
+    </header>
+      <main></main>
+      <footer></footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
