@@ -10,6 +10,9 @@ type TClothes = {
   title: string
 }
 
+const base_URL = 'https://fakestoreapi.com';
+const base_URL_products = `${base_URL}/products`;
+
 const searchInput = document.querySelector('#searchInput') as HTMLInputElement;
 const sortSelect = document.querySelector('#sortSelect') as HTMLSelectElement;
 const filterButtons = document.querySelectorAll('.filter__Btn') as NodeListOf<HTMLButtonElement>;
@@ -19,10 +22,11 @@ const searchBtn = document.querySelector('#searchBtn') as HTMLButtonElement;
 function renderCatalog(title?: string): void {
   main.innerHTML = '';
 
-  fetch('https://fakestoreapi.com/products')
+  fetch(base_URL_products)
     .then((response) => {
       return response.json();
     }).then((clothes: TClothes[]) => {
+      //? -------------- Searching part --------------
       if(title) {
         clothes.forEach((product) => {
           if(product.title.toLowerCase().includes(title)) {
@@ -30,6 +34,7 @@ function renderCatalog(title?: string): void {
             return;
           }
         });
+        //? -------------- Standard part --------------
       } else {
         clothes.forEach((product) => createClothesCard(product.image, product.title, product.price));
       }
@@ -60,19 +65,39 @@ function createClothesCard(imgURL: string, title: string, price: number): void {
   main.appendChild(productContainer);
 }
 
-function sortCatalog(category?: string): void {
+function sortCatalog(category: string): void {
   main.innerHTML = '';
 
   if(category) {
-    fetch(`https://fakestoreapi.com/products/category/${category}`)
-    .then((response) => { 
-      return response.json();
-    }).then((clothes: TClothes[]) => {
-      clothes.forEach((product) => createClothesCard(product.image, product.title, product.price));
-    })
-    return;
+    if(category === 'asc') {
+      fetch(base_URL_products)
+        .then((response) => {
+          return response.json();
+        }).then((clothes: TClothes[]) => {
+          const sortedPriceArr = clothes.sort((a: TClothes, b: TClothes) => a.price - b.price);
+          sortedPriceArr.forEach((product) => {
+            createClothesCard(product.image, product.title, product.price);
+          })
+        })
+    } else if(category === 'desc') {
+      fetch(base_URL_products)
+      .then((response) => {
+        return response.json();
+      }).then((clothes: TClothes[]) => {
+        const sortedPriceArr = clothes.sort((a: TClothes, b: TClothes) => b.price - a.price);
+        sortedPriceArr.forEach((product) => {
+          createClothesCard(product.image, product.title, product.price);
+        })
+      })
+    } else {
+      fetch(`https://fakestoreapi.com/products/category/${category}`)
+      .then((response) => { 
+        return response.json();
+      }).then((clothes: TClothes[]) => {
+        clothes.forEach((product) => createClothesCard(product.image, product.title, product.price));
+      })
+    }
   }
-
 }
 
 //? ------------------ Button events ------------------
@@ -88,10 +113,9 @@ searchBtn.addEventListener('click', () => {
   renderCatalog(titleName);
 })
 
-// sortSelect.addEventListener('change', () => {
-//   if(sortSelect.value === 'desc') {
-
-//   }
-// })
+sortSelect.addEventListener('change', () => {
+    const order = sortSelect.value;
+    sortCatalog(order);
+})
 
 renderCatalog();
